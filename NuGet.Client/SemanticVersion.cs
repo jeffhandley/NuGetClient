@@ -5,7 +5,16 @@ using System.Text;
 
 namespace NuGet.Client
 {
-    class SemanticVersion
+    public class SemanticVersion
     {
+        internal static int Compare(SemanticVersion feedVersion, SemanticVersion semanticVersion, SemanticVersionComparer semanticVersionComparer)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static int Compare(SemanticVersion feedVersion, SemanticVersion semanticVersion, SemanticVersionComparison semanticVersionComparison)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

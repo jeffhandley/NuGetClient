@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace NuGet.Client
 {
@@ -9,6 +10,9 @@ namespace NuGet.Client
     {
         public string Id { get; set; }
         public SemanticVersion Version { get; set; }
-        public T GetMetadataProperty<T>(string name);
+        public T GetMetadataProperty<T>(string name)
+        {
+            return default(T);
+        }
     }
 }

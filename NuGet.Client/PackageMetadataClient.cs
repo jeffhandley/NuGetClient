@@ -7,7 +7,7 @@ namespace NuGet.Client
 {
     public class PackageMetadataClient
     {
-        public PackageMetadataClient(Uri repository)
+        public PackageMetadataClient(Configuration.Repositories repositories)
         {
 
         }
@@ -16,13 +16,18 @@ namespace NuGet.Client
         {
             throw new NotImplementedException();
         }
+
+        internal System.Xml.Linq.XDocument GetNuspec(IPackageMetadata package)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class PackageMetadataClientExtensions
     {
-        public static PackageMetadataClient CreatePackageMetadataClient(this Clients host, Uri repository)
+        public static PackageMetadataClient CreatePackageMetadataClient(this Clients host, Configuration.Repositories repositories)
         {
-            return new PackageMetadataClient(repository);
+            return new PackageMetadataClient(repositories);
         }
 
     }

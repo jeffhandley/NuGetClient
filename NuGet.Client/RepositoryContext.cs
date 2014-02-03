@@ -8,7 +8,7 @@ namespace NuGet.Client
 {
     public static class RepositoryContext
     {
-        public static RepositoryContext()
+        static RepositoryContext()
         {
             Clients = new Clients();
         }
