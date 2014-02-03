@@ -45,6 +45,7 @@
     <Compile Include="IFeedPackage.cs" />
     <Compile Include="INupkg.cs" />
     <Compile Include="IPackageMetadata.cs" />
+    <Compile Include="PackageDocumentClient.cs" />
     <Compile Include="PackageDownloader.cs" />
     <Compile Include="PackageDownloadClient.cs" />
     <Compile Include="PackageMetadataClient.cs" />

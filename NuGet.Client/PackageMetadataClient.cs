@@ -16,11 +16,6 @@ namespace NuGet.Client
         {
             throw new NotImplementedException();
         }
-
-        internal System.Xml.Linq.XDocument GetNuspec(IPackageMetadata package)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public static class PackageMetadataClientExtensions

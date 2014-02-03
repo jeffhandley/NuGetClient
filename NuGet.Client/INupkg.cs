@@ -7,5 +7,6 @@ namespace NuGet.Client
 {
     interface INupkg
     {
+        IEnumerable<IPackageMetadata> MetadataDefinitions { get; set; }
     }
 }
