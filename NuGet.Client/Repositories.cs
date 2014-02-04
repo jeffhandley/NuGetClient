@@ -7,5 +7,6 @@ namespace NuGet.Client.Configuration
 {
     public class Repositories
     {
+
     }
 }

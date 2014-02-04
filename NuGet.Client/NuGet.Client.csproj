@@ -40,14 +40,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients.cs" />
+    <Compile Include="DependencyResolution.cs" />
+    <Compile Include="DependencyResolver.cs" />
     <Compile Include="FeedsClient.cs" />
     <Compile Include="IFeed.cs" />
     <Compile Include="IFeedPackage.cs" />
     <Compile Include="INupkg.cs" />
+    <Compile Include="IPackageIdentity.cs" />
     <Compile Include="IPackageMetadata.cs" />
-    <Compile Include="PackageDocumentClient.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="NuGetExe.cs" />
     <Compile Include="PackageDownloader.cs" />
     <Compile Include="PackageDownloadClient.cs" />
+    <Compile Include="PackageInventory.cs" />
     <Compile Include="PackageMetadataClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories.cs" />

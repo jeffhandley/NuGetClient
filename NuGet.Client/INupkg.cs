@@ -5,8 +5,10 @@ using System.Text;
 
 namespace NuGet.Client
 {
-    interface INupkg
+    public interface INupkg
     {
         IEnumerable<IPackageMetadata> MetadataDefinitions { get; set; }
+
+        void UnpackTo(string targetPath);
     }
 }

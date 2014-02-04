@@ -11,7 +11,6 @@ namespace NuGet.Client
     {
         private FeedsClient _feedsClient;
         private PackageMetadataClient _metadataClient;
-        private PackageDocumentClient _documentClient;
         private PackageDownloadClient _downloadClient;
 
         /// <summary>
@@ -45,7 +44,6 @@ namespace NuGet.Client
             // on a repository though, which will be the case almost 100% of the time.
             _feedsClient = RepositoryContext.Clients.CreateFeedsClient(repositories);
             _metadataClient = RepositoryContext.Clients.CreatePackageMetadataClient(repositories);
-
             _downloadClient = RepositoryContext.Clients.CreatePackageDownloadClient(repositories);
         }
 
@@ -109,8 +107,8 @@ namespace NuGet.Client
                 // that link will be followed to get the nuspec file and load it as an
                 // XDocument.  If the IPackageMetadata does not include a link to the
                 // nuspec file, then the Id/Version of the package will be used to fetch
-                // the nuspec file from the _documentClient from one of the repositories.
-                XDocument nuspec = _documentClient.GetNuspec(package);
+                // the nuspec file from the _metadataClient from one of the repositories.
+                XDocument nuspec = _metadataClient.GetNuspec(package);
 
                 if (nuspec.Root
                     .Element("package")

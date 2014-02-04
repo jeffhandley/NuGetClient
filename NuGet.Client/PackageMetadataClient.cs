@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace NuGet.Client
 {
@@ -13,6 +14,11 @@ namespace NuGet.Client
         }
 
         internal IEnumerable<IPackageMetadata> GetPackageVersions(string packageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public XDocument GetNuspec(IPackageMetadata package)
         {
             throw new NotImplementedException();
         }

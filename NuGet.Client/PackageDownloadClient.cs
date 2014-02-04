@@ -16,6 +16,11 @@ namespace NuGet.Client
         {
             throw new NotImplementedException();
         }
+
+        internal INupkg GetNupkg(IPackageIdentity identity)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class PackageDownloadClientExtensions
