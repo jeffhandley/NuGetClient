@@ -7,7 +7,7 @@ namespace NuGet.Client
 {
     public interface INupkg
     {
-        IEnumerable<IPackageMetadata> MetadataDefinitions { get; set; }
+        IEnumerable<IPackageVersionMetadata> MetadataDefinitions { get; set; }
 
         void UnpackTo(string targetPath);
     }

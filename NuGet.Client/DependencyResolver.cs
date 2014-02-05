@@ -8,8 +8,12 @@ namespace NuGet.Client
 {
     public class DependencyResolver
     {
-        internal static DependencyResolution Resolve(Configuration.Repositories repositories, string id, SemanticVersion version, PackageInventory localInventory)
+        public static DependencyResolution Resolve(ResolutionContext context, string id, SemanticVersion version, PackageInventory localInventory)
         {
+            IPackageMetadata metadata = context.GetMetadata(id, version);
+
+            
+
             throw new NotImplementedException();
         }
     }

@@ -13,12 +13,22 @@ namespace NuGet.Client
 
         }
 
-        internal IEnumerable<IPackageMetadata> GetPackageVersions(string packageId)
+        internal IEnumerable<IPackageVersionMetadata> GetPackageVersions(string packageId)
         {
             throw new NotImplementedException();
         }
 
-        public XDocument GetNuspec(IPackageMetadata package)
+        public IPackageMetadata GetPackageMetadata(string packageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public XDocument GetNuspec(IPackageVersionMetadata package)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IPackageMetadata GetPackageMetadata(string packageId, SemanticVersion version)
         {
             throw new NotImplementedException();
         }

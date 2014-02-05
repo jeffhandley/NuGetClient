@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
 
 namespace NuGet.Client
 {
     public class IPackageMetadata
     {
-        public string Id { get; set; }
-        public SemanticVersion Version { get; set; }
-        public T GetMetadataProperty<T>(string name)
+        public IPackageMetadata FilterToAllowedPackageIdentities(ISet<IPackageIdentity> AllowedPackageIdentities)
         {
-            return default(T);
+            throw new NotImplementedException();
         }
     }
 }

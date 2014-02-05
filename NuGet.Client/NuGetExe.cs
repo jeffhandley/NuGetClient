@@ -15,7 +15,7 @@ namespace NuGet.Client
 
         }
 
-        public void InstallCommand(Repositories repositories, string targetPath, string id, SemanticVersion version = null, PackageInventory localInventory = null)
+        public void InstallCommand(ResolutionContext resolutionContext, IEnumerable<PackageDownloadClient> downloadClients, string targetPath, string id, SemanticVersion version = null, PackageInventory localInventory = null)
         {
             /// 1. Resolve the dependency graph
             ///     a. Get metadata for id (all versions if null, or specific version if specified),
@@ -29,13 +29,13 @@ namespace NuGet.Client
             ///         * Note that there will be callers that need to 
             /// 3. Update local inventory object
 
-            DependencyResolution resolution = DependencyResolver.Resolve(repositories, id, version, localInventory);
+            DependencyResolution resolution = DependencyResolver.Resolve(resolutionContext, id, version, localInventory);
 
             // This foreach should be parallel
             foreach (IPackageIdentity package in resolution.Installs)
             {
                 string packagePath = Path.Combine(targetPath, package.Id, package.Version.ToString());
-                DownloadAndUnzipSinglePackage(repositories, packagePath, package);
+                DownloadAndUnzipSinglePackage(downloadClients, package, packagePath);
             }
 
             UpdateInventory(localInventory, resolution);
@@ -56,11 +56,18 @@ namespace NuGet.Client
             }
         }
 
-        public void DownloadAndUnzipSinglePackage(Repositories repositories, string targetPath, IPackageIdentity identity)
+        public void DownloadAndUnzipSinglePackage(IEnumerable<PackageDownloadClient> downloadClients, IPackageIdentity identity, string targetPath)
         {
-            PackageDownloadClient downloadClient = RepositoryContext.Clients.CreatePackageDownloadClient(repositories);
-            INupkg nupkg = downloadClient.GetNupkg(identity);
-            nupkg.UnpackTo(targetPath);
+            foreach (PackageDownloadClient downloadClient in downloadClients)
+            {
+                INupkg nupkg = downloadClient.GetNupkg(identity);
+
+                if (nupkg != null)
+                {
+                    nupkg.UnpackTo(targetPath);
+                    return;
+                }
+            }
         }
     }
 }

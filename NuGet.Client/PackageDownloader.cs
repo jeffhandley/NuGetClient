@@ -72,12 +72,12 @@ namespace NuGet.Client
         /// <remarks>
         /// Note that build metadata cannot be used in the order by here because build metadata cannot be sorted.
         /// </remarks>
-        public IEnumerable<IPackageMetadata> GetSortedPackageVersionsWithinFeeds(string packageId, IEnumerable<IFeed> feeds)
+        public IEnumerable<IPackageVersionMetadata> GetSortedPackageVersionsWithinFeeds(string packageId, IEnumerable<IFeed> feeds)
         {
             IEnumerable<IFeedPackage> packageVersionFilter = feeds.SelectMany(f => f.Packages
                 .Where(p => String.Compare(p.PackageId, packageId, StringComparison.OrdinalIgnoreCase) == 0));
 
-            IEnumerable<IPackageMetadata> versionsAvailable = _metadataClient.GetPackageVersions(packageId);
+            IEnumerable<IPackageVersionMetadata> versionsAvailable = _metadataClient.GetPackageVersions(packageId);
 
             return versionsAvailable
                 .Where(v => packageVersionFilter.Any(f => SemanticVersion.Compare(f.PackageVersion, v.Version, SemanticVersionComparison.Exact) == 0))
@@ -88,7 +88,7 @@ namespace NuGet.Client
         /// Filter the packages found to match a specified architecture.  This information is available
         /// right on the metadata service's output since it's just a scalar value.
         /// </summary>
-        public IEnumerable<IPackageMetadata> FilterToArchitecture(IEnumerable<IPackageMetadata> packages, string architecture)
+        public IEnumerable<IPackageVersionMetadata> FilterToArchitecture(IEnumerable<IPackageVersionMetadata> packages, string architecture)
         {
             // Simple scalar properties are available directly from the metadata returned
             // from the metadata service.  But complex properties are not.
@@ -99,9 +99,9 @@ namespace NuGet.Client
         /// Filter the packages down to those that are compatible with a specified VS Toolset.  This might
         /// require getting the nuspec file (served directly from the document service without downloading the nupkg).
         /// </summary>
-        public IEnumerable<IPackageMetadata> FilterToVCToolset (IEnumerable<IPackageMetadata> packages, string vcToolset)
+        public IEnumerable<IPackageVersionMetadata> FilterToVCToolset (IEnumerable<IPackageVersionMetadata> packages, string vcToolset)
         {
-            foreach (IPackageMetadata package in packages)
+            foreach (IPackageVersionMetadata package in packages)
             {
                 // If the IPackageMetadata includes a link to the package's nuspec file
                 // that link will be followed to get the nuspec file and load it as an
@@ -124,9 +124,9 @@ namespace NuGet.Client
         /// <summary>
         /// Download the nupkg files that the discovered packages were found in.
         /// </summary>
-        public IEnumerable<INupkg> DownloadNupkgs(IEnumerable<IPackageMetadata> packages)
+        public IEnumerable<INupkg> DownloadNupkgs(IEnumerable<IPackageVersionMetadata> packages)
         {
-            foreach (IPackageMetadata package in packages)
+            foreach (IPackageVersionMetadata package in packages)
             {
                 yield return _downloadClient.GetNupkg(package);
             }
@@ -137,11 +137,11 @@ namespace NuGet.Client
         /// and illustrate that we can now round-trip back to IPackageMetadata objects off
         /// the local nupkg files.
         /// </summary>
-        public IEnumerable<IPackageMetadata> GetNuspecs(IEnumerable<INupkg> packages)
+        public IEnumerable<IPackageVersionMetadata> GetNuspecs(IEnumerable<INupkg> packages)
         {
             foreach (INupkg package in packages)
             {
-                foreach (IPackageMetadata metadata in package.MetadataDefinitions)
+                foreach (IPackageVersionMetadata metadata in package.MetadataDefinitions)
                 {
                     yield return metadata;
                 }

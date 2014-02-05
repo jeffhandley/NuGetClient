@@ -12,7 +12,7 @@ namespace NuGet.Client
 
         }
 
-        internal INupkg GetNupkg(IPackageMetadata package)
+        internal INupkg GetNupkg(IPackageVersionMetadata package)
         {
             throw new NotImplementedException();
         }

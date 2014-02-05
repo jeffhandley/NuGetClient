@@ -41,7 +41,7 @@ namespace NuGet.Client
             throw new NotImplementedException();
         }
 
-        public bool Equals(object x, object y)
+        public new bool Equals(object x, object y)
         {
             throw new NotImplementedException();
         }
